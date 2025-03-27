@@ -1,0 +1,70 @@
+Kacper Rybkowski 
+
+Zadanie 1
+SELECT * FROM klienci,produkty;
+
+Zadanie 2
+SELECT zamow.*, detal_zamow.sztuk FROM zamow,detal_zamow WHERE detal_zamow.z_id = zamow.idz;
+
+Zadanie 3 
+SELECT produkty.nazwa, detal_zamow.sztuk FROM produkty, detal_zamow WHERE produkty.idp = detal_zamow.p_id;
+
+Zadanie 4
+SELECT detal_zamow.*, (produkty.cena * detal_zamow.sztuk) AS wartosc_zamowienia FROM detal_zamow,produkty WHERE produkty.idp = detal_zamow.p_id ORDER BY(wartosc_zamowienia) DESC;
+
+Zadanie 5
+SELECT detal_zamow.sztuk, zamow.data FROM detal_zamow, zamow WHERE zamow.idz = detal_zamow.z_id AND HOUR(data) BETWEEN 12 AND 18;
+
+Zadanie 6
+SELECT klienci.miasto, MONTHNAME(zamow.data) AS miesiac_zamowienia_spoza_wroclawia FROM klienci,zamow WHERE zamow.k_id = klienci.idk AND klienci.miasto NOT LIKE "Wrocław";
+
+Zadanie 7
+SELECT produkty.cena,DAYNAME(data) AS dzien_zamowienia FROM produkty, zamow, detal_zamow WHERE detal_zamow.z_id = zamow.idz AND produkty.idp = detal_zamow.p_id AND DAYNAME(data) = 'Friday';
+
+Zadanie 8
+
+
+Zadanie 9
+SELECT produkty.nazwa, klienci.adres 
+	FROM produkty,klienci,detal_zamow,zamow 
+	WHERE produkty.idp = detal_zamow.p_id 
+	AND klienci.idk = zamow.k_id 
+	AND detal_zamow.z_id = zamow.idz 
+	AND produkty.nazwa 
+	LIKE "%laptop%" 
+ORDER BY klienci.nazwa DESC;
+
+Zadanie 10
+SELECT klienci.telefon,produkty.cena 
+	FROM produkty,klienci,detal_zamow,zamow 
+	WHERE produkty.idp = detal_zamow.p_id 
+	AND klienci.idk = zamow.k_id 
+	AND detal_zamow.z_id = zamow.idz 
+	AND klienci.telefon 
+	LIKE "%4%"
+ORDER BY produkty.cena ASC;
+
+Zadanie 11
+SELECT * FROM klienci WHERE nazwa IN (SELECT nazwa FROM produkty);
+
+Zadanie 12 
+SELECT klienci.nazwa, DATE(zamow.data) AS data_dzienna FROM zamow,klienci WHERE klienci.idk = zamow.k_id ORDER BY data_dzienna;
+
+Zadanie 13 
+SELECT produkty.nazwa, klienci.miasto 
+	FROM klienci,produkty,zamow,detal_zamow 
+	WHERE klienci.idk = zamow.k_id
+	AND produkty.idp = detal_zamow.p_id 
+	AND zamow.idz = detal_zamow.z_id;
+
+Zadanie 14
+
+
+Zadanie 15
+
+
+Zadanie 16
+
+
+Zadanie 17
+bez podzapytań !!
