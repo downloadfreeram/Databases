@@ -22,7 +22,12 @@ Zadanie 7
 SELECT produkty.cena,DAYNAME(data) AS dzien_zamowienia FROM produkty, zamow, detal_zamow WHERE detal_zamow.z_id = zamow.idz AND produkty.idp = detal_zamow.p_id AND DAYNAME(data) = 'Friday';
 
 Zadanie 8
-
+SELECT klienci.nazwa,detal_zamow.sztuk,klienci.miasto 
+	FROM klienci,detal_zamow,zamow 
+	WHERE detal_zamow.z_id = zamow.idz 
+	AND klienci.idk = zamow.k_id 
+	AND detal_zamow.sztuk > 4 
+ORDER BY klienci.miasto DESC;
 
 Zadanie 9
 SELECT produkty.nazwa, klienci.adres 
@@ -58,13 +63,17 @@ SELECT produkty.nazwa, klienci.miasto
 	AND zamow.idz = detal_zamow.z_id;
 
 Zadanie 14
-
+SELECT produkty.nazwa FROM produkty WHERE NOT EXISTS (SELECT 1 FROM detal_zamow WHERE detal_zamow.p_id = produkty.idp);
 
 Zadanie 15
-
+SELECT klienci.nazwa FROM klienci WHERE NOT EXISTS (SELECT 1 FROM zamow WHERE zamow.k_id = klienci.idk);
 
 Zadanie 16
-
+SELECT zamow.idz FROM zamow WHERE NOT EXISTS (SELECT 1 FROM detal_zamow WHERE detal_zamow.z_id = zamow.idz);
 
 Zadanie 17
-bez podzapytań !!
+
+** Zadanie jest mozliwe do zrobienia z wykorzystaniem funkcji agregującej GROUP BY **
+
+SELECT COUNT(detal_zamow.p_id) FROM produkty,detal_zamow WHERE produkty.idp = detal_zamow.p_id AND p_id = 4 GROUP BY detal_zamow.p_id;
+
